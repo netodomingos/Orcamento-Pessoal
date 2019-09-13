@@ -1,4 +1,4 @@
-# Orcamento-Pessoal
+# Orçamento-Pessoal
 Criação de App que cuida de orçamento, utilizando novas features JavaScript
 
 # Registo de Despesas e Consulta
@@ -10,3 +10,5 @@ Dependendo do preenchimento da página, respondemos de forma diferente com cada 
 O modal foi escrito todo em JavaScript, fazendo com que não fique HardCode no Html.
 
 Mudando assim todo o conteúdo e classe BootStrap da página.
+
+
