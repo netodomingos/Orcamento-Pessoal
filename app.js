@@ -8,7 +8,21 @@ class Despesa {
             this.descricao = descricao,
             this.valor = valor
     }
+
+    // Validação dos dados
+    validarDados() {
+        for (let i in this) {
+            if (this[i] == undefined || this[i] == '' || this[i] == null) {
+                return false
+            }
+
+        }
+        return true
+    }
+
 }
+
+// Classe que armazena os dados
 class Bd {
     constructor() {
         let id = localStorage.getItem('id')
@@ -19,7 +33,7 @@ class Bd {
     }
     getNextId() {
         let nextId = localStorage.getItem('id') //Recuperar Dado
-        return parseInt(nextId + 1) // Aumentando o Id
+        return Number(nextId) + 1// Aumentando o Id
     }
     gravarDados(d) {
         let id = this.getNextId()
@@ -53,6 +67,34 @@ const cadastrarDespesas = () => {
         valor.value
     )
 
-    // Chamada de função que armazena os dados
-    bd.gravarDados(despesa)
+    // Melhorias no modal
+    if (despesa.validarDados()) {
+        bd.gravarDados(despesa)
+
+        document.querySelector('h5').innerHTML = 'Yerh! Despesa adicionada.'
+
+        document.getElementById('divTextColor').className = 'modal-header text-success'
+
+        document.getElementById('divText').innerHTML = 'Despesas gravadas com sucesso!'
+
+        document.getElementById('button').className = 'btn btn-success'
+
+        document.getElementById('button').innerHTML = 'Voltar'
+
+        $('#modalRegistroDespesa').modal('show')
+
+    }
+    else {
+        document.querySelector('h5').innerHTML = 'Oh não! Algo errado aconteceu :('
+
+        document.getElementById('divTextColor').className = 'modal-header text-danger'
+
+        document.getElementById('divText').innerHTML = 'Existem campos obrigatórios que não foram preenchidos.'
+
+        document.getElementById('button').className = 'btn btn-danger'
+
+        document.getElementById('button').innerHTML = 'Voltar e Corrigir'
+
+        $('#modalRegistroDespesa').modal('show')
+    }
 }
