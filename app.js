@@ -41,6 +41,32 @@ class Bd {
 
         localStorage.setItem('id', id) //Atualização do Id
     }
+    recuperarTodosRegistros() {
+
+        // Array de despesas
+        let despesas = []
+
+        let id = localStorage.getItem('id')
+
+        // Recuperar todas as despesas cadastradas
+        for (let i = 1; i <= id; i++) {
+
+            // Recuperando despesa
+            let despesa = JSON.parse(localStorage.getItem(i))
+
+            // Possibilidade de indíces nulos
+
+            if (despesa === null) {
+                // pula para a próxima interação
+                continue
+            }
+
+            despesas.push(despesa)
+        }
+
+        return despesas
+    }
+
 }
 
 let bd = new Bd()
@@ -82,6 +108,16 @@ const cadastrarDespesas = () => {
 
         $('#modalRegistroDespesa').modal('show')
 
+        // Deixando os campos em branco após salvamento
+        ano.value = ''
+        mes.value = ''
+        dia.value = ''
+        tipo.value = ''
+        descricao.value = ''
+        valor.value = ''
+
+
+
     }
     else {
         document.querySelector('h5').innerHTML = 'Oh não! Algo errado aconteceu :('
@@ -96,4 +132,40 @@ const cadastrarDespesas = () => {
 
         $('#modalRegistroDespesa').modal('show')
     }
+}
+
+// Renderizando elementos na página de consulta
+const carregaListaDespesas = () => {
+    let despesas = []
+
+    despesas = bd.recuperarTodosRegistros()
+
+    let listaDespesas = document.getElementById('listaDespesas')
+
+    despesas.forEach(function (d) {
+
+        // Criando linhas
+        let linha = listaDespesas.insertRow()
+
+        // Criando as colunas
+        linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`
+
+        switch (d.tipo) {
+            case '1': d.tipo = 'Alimentação'
+                break
+            case '2': d.tipo = 'Educação'
+                break
+            case '3': d.tipo = 'Lazer'
+                break
+            case '4': d.tipo = 'Saúde'
+                break
+            case '5': d.tipo = 'Transporte'
+                break
+        }
+
+        linha.insertCell(1).innerHTML = d.tipo
+        linha.insertCell(2).innerHTML = d.descricao
+        linha.insertCell(3).innerHTML = d.valor
+
+    })
 }

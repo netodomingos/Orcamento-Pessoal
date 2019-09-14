@@ -11,4 +11,7 @@ O modal foi escrito todo em JavaScript, fazendo com que não fique HardCode no H
 
 Mudando assim todo o conteúdo e classe BootStrap da página.
 
+# Apresentação de lista de despesas
+Página de consulta, que apresenta todas as despesas adicionadas.
+
 
