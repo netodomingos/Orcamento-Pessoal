@@ -15,7 +15,6 @@ class Despesa {
             if (this[i] == undefined || this[i] == '' || this[i] == null) {
                 return false
             }
-
         }
         return true
     }
