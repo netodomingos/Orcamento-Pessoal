@@ -14,4 +14,7 @@ Mudando assim todo o conteúdo e classe BootStrap da página.
 # Apresentação de lista de despesas
 Página de consulta, que apresenta todas as despesas adicionadas.
 
+# Deleção de Despesas
+Adição de funcionalidade, que deleta despesas na página de consulta
+
 
